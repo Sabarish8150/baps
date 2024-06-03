@@ -344,7 +344,7 @@ const TeacherRegistrationForm = () => {
     
             </select>
           </div>
-          {/* gbynhumji,k. */}
+         
           <div className="w-full sm:w-1/2 px-4 mb-4">
             <label htmlFor="Cast" className="block text-sm font-bold mb-1">Cast</label>
             <select
