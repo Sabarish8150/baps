@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const TeacherRegistrationForm = () => {
+  const [isConfirmed,setisConformed] = useState(false);
+  const [isclick,Setclick] = useState(false);
   const [formData, setFormData] = useState({
     staffName: '',
     staffId: '',
@@ -65,23 +68,35 @@ const TeacherRegistrationForm = () => {
       image: e.target.files[0],
     });
   };
-
-
+const handlecheck = () =>{
+  setisConformed(true);
+};
+const notify = () => {
+    
+   
+      
+  toast.success('Your Form is Submitted Succesfully!', {
+    
+    className: 'bg-green-500 text-white',
+    progressClassName: 'bg-white',
+    bodyClassName: 'font-semibold',
+  
+  });
+};
   const handleSubmit = (e) => {
     e.preventDefault();
     
     // Show confirm dialog
-    const isConfirmed = window.confirm("Form submitted successfully! Do you want to reload the page?");
+    //const isConfirmed = window.confirm("Form submitted successfully! Do you want to reload the page?");
     
    
   
     // Reload the page if confirmed
     if (isConfirmed) {
+      notify();
       window.location.reload();
     }
-    else{
-      alert("Please Check Again")
-    }
+    
 };
 
   const handlelanguageChange = (e) => {
@@ -178,7 +193,7 @@ const TeacherRegistrationForm = () => {
               value={formData.experience}
               onChange={handleChange}
               className="w-full py-2 px-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500 min"
-              required
+              
               min={0}
               max={25}
             />
@@ -228,13 +243,13 @@ const TeacherRegistrationForm = () => {
                 <input
                   type="radio"
                   name="gender"
-                  value="transgender"
-                  checked={formData.gender === 'transgender'}
+                  value="Others"
+                  checked={formData.gender ==='Others'}
                   onChange={handleGenderChange}
                   className="mr-2"
                   
                 />
-                Transgender
+                Others
               </label>
             </div>
           </div>
@@ -264,6 +279,28 @@ const TeacherRegistrationForm = () => {
                 />
                 Mrs
               </label>
+              <label className="mr-4">
+                <input
+                  type="radio"
+                  name="title"
+                  value="Mrs"
+                  checked={formData.title === 'Mrs'}
+                  onChange={handleTitleChange}
+                  className="mr-2"
+                />
+                Dr
+              </label>
+              <label className="mr-4">
+                <input
+                  type="radio"
+                  name="title"
+                  value="Mrs"
+                  checked={formData.title === 'Mrs'}
+                  onChange={handleTitleChange}
+                  className="mr-2"
+                />
+                Ms
+              </label>
               
             </div>
           </div>
@@ -271,7 +308,7 @@ const TeacherRegistrationForm = () => {
             <label htmlFor="image" className="block text-sm font-bold mb-1">Choose Image</label>
             <input
               type="file"
-              required
+              
               id="image"
               name="image"
               onChange={handleImageChange}
@@ -290,7 +327,7 @@ const TeacherRegistrationForm = () => {
               className="w-full py-2 px-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500  "
               dateFormat="yyyy-MM-dd"
               placeholderText="Select date"
-              required
+              
             />
           </div>
           <div className="w-full sm:w-1/2 px-4 mb-4">
@@ -414,12 +451,30 @@ const TeacherRegistrationForm = () => {
               value={formData.ResidentialAddress}
               onChange={handleChange}
               className="w-full py-2 px-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
-              required
+         
               
             />
           </div>
+          <div className="w-full px-4 mb-4">
+        <label className="block text-sm font-bold mb-1">
+          <input
+            type="checkbox"
+            name="check"
+            onClick={formData.click===true}
+          />
+          Confirm that all inputs are true and correct
+          {form === true &&
+          <p>
+            The Values  are all  True regarding to me
+          </p>
+          }
+        </label>
+      </div>
         </div>
-        <button type="submit" className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ">Register</button>
+        <button type="submit" 
+        onClick={handlecheck}
+        className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ">Register</button>
+      <ToastContainer/>
       </form>
     </div>
   );
