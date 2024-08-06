@@ -1,4 +1,3 @@
- 
 import React from 'react';
 import { FaUser, FaLock, FaGoogle } from 'react-icons/fa'; // Import icons from react-icons library
 
